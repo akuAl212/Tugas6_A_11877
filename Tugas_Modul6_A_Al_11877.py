@@ -5,8 +5,7 @@ from tensorflow.keras.models import load_model
 from PIL import Image
 
 # Load the pre-trained model
-# Replace with actual path model Anda (model terbaik yang di dump dalam format .h5)
-model = (r"model_mobilenet.h5") 
+model = (r'model_mobilenet.h5')
 class_names = ['Matang', 'Mentah']
 
 # Function to preprocess and classify image
@@ -17,7 +16,7 @@ def classify_image(image_path):
         input_image_array = tf.keras.utils.img_to_array(input_image)
         input_image_exp_dim = tf.expand_dims(input_image_array, 0)
 
-        # Predict with the model
+        # Predict using the model
         predictions = model.predict(input_image_exp_dim)
         result = tf.nn.softmax(predictions[0])  # Apply softmax for probability
 
@@ -33,7 +32,7 @@ def custom_progress_bar(confidence, color1, color2):
     percentage1 = confidence[0] * 100  # Confidence for class 0 (Matang)
     percentage2 = confidence[1] * 100  # Confidence for class 1 (Mentah)
     progress_html = f"""
-    <div style="width: 100%; border: 1px solid #ddd; border-radius: 5px; overflow: hidden; width: 100%; font-size: 14px;">
+    <div style="border: 1px solid #ddd; border-radius: 5px; overflow: hidden; width: 100%; font-size: 14px;">
         <div style="width: {percentage1:.2f}%; background: {color1}; color: white; text-align: center; height: 24px; float: left;">
             {percentage1:.2f}%
         </div>
@@ -45,12 +44,12 @@ def custom_progress_bar(confidence, color1, color2):
     st.sidebar.markdown(progress_html, unsafe_allow_html=True)
 
 # Streamlit UI
-st.title("Prediksi Kematangan Buah Naga - 1877")  # 4 digit npm terakhir
+st.title("Prediksi Kematangan Buah Naga - XXXX")  # Ganti XXXX dengan 4 digit NPM terakhir
 
 # Upload multiple files in the main page
 uploaded_files = st.file_uploader("Unggah Gambar (Beberapa diperbolehkan)", type=["jpg", "png", "jpeg"], accept_multiple_files=True)
 
-# Sidebar for prediction and results
+# Sidebar for prediction button and results
 if st.sidebar.button("Prediksi"):
     if uploaded_files:
         st.sidebar.write("### Hasil Prediksi")
@@ -63,7 +62,7 @@ if st.sidebar.button("Prediksi"):
 
             if label != "Error":
                 # Define colors for the bar and label
-                primary_color = "#0087FF"  # Blue for "Matang"
+                primary_color = "#007BFF"  # Blue for "Matang"
                 secondary_color = "#FF4136"  # Red for "Mentah"
                 label_color = primary_color if label == "Matang" else secondary_color
 
